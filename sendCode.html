@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    <style>
+    	button{
+    		width: 100px;
+    		height: 50px;
+    		border: 0 none;
+    		background-color:skyblue;
+    		text-align:center;
+    		line-height: 50px;
+    		border-radius:10px;
+    	}
+    </style>
+</head>
+<body ng-controller="sendCode-ctrl">
+	<button type="button" ng-click="sendcode()" ng-disabled="disabled">{{description}}</button>
+	<script type="text/javascript">
+		var app = angular.module('myapp',[]);
+		app.controller('sendCode-ctrl', ['$scope','$interval', function($scope,$interval){
+            $scope.description = '获取验证码';
+            $scope.disabled = false;
+            $scope.sendcode = function(){
+            	$scope.description = 5;
+            	$scope.disabled = true;
+            	var timer = $interval(function(){
+            		$scope.description -- ;
+            	},1000,5);
+            	timer.then(function(){
+            		$scope.description = '获取验证码';
+                    $scope.disabled = false;
+            	})
+            }
+		}])
+
+	</script>
+</body>
+</html>
